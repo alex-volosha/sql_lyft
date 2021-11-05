@@ -1,0 +1,14 @@
+Select date_trunc(‘week’, end_time) as week,
+count(distinct rides.driver_id)
+From rides
+left join drivers
+on rides.driver_id = drivers.driver_id
+Left join Region
+ON drivers.home_region_id = Region.region_id
+Where is_completed =‘Y’
+And end_time >= ‘2021-07-05’,
+And end_time < ’2021-10-26’,
+And region_name = ‘San Francisco’
+Group by date_trunc(‘week’, end_time)
+Order by date_trunc(‘week’, end_time) desc
+Limit 12;
